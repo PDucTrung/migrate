@@ -7,11 +7,15 @@ cd <project_directory>
 
 ---
 
-## 📅 Calculate Attendance Script
+## 📅 Migrate Script
 
 ### 🟢 **Usage**
 ```bash
 yarn import-phone <file-path>
+
+```
+
+```bash
 yarn import-user <file-path>
 
 ```
