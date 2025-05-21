@@ -5,10 +5,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "import-phone": "node import-phone.js"
+    "import-phone": "node import-phone.js",
+    "import-user": "node import-user.js"
   },
   "dependencies": {
     "dotenv": "^16.5.0",
+    "iconv-lite": "^0.6.3",
     "mongoose": "^8.15.0",
     "xlsx": "^0.18.5"
   }

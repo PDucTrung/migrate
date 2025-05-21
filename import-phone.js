@@ -10,7 +10,7 @@ async function run() {
 
   await Phone.syncIndexes();
 
-  const workbook = xlsx.readFile("./data/vnphone.csv");
+  const workbook = xlsx.readFile("./data/vnphone.csv"); // vnphone.csv
   const sheet = workbook.Sheets[workbook.SheetNames[0]];
   const rows = xlsx.utils.sheet_to_json(sheet, { defval: "" });
 

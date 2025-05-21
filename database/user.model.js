@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
   {
     uid: { type: String, required: true, index: true  },
     phone: { type: String, required: true, index: true  },
-    name: { type: Strin, index: true  },
+    name: { type: String, index: true  },
     sex: { type: String, maxlength: 20 },
     location: { type: String },
     friends: { type: Number, default: 0 },
