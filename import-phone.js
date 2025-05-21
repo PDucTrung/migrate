@@ -10,7 +10,13 @@ async function run() {
 
   await Phone.syncIndexes();
 
-  const workbook = xlsx.readFile("./data/vnphone.csv"); // vnphone.csv
+  const FILE_PATH = process.argv[2];
+  if (!FILE_PATH) {
+    console.error("❌ missing file path.");
+    process.exit(1);
+  }
+
+  const workbook = xlsx.readFile(FILE_PATH); // vnphone.csv
   const sheet = workbook.Sheets[workbook.SheetNames[0]];
   const rows = xlsx.utils.sheet_to_json(sheet, { defval: "" });
 

@@ -9,7 +9,11 @@ import { UserGroupLink } from "./database/userGroupLink.model.js";
 import { MONGO_URI, DB_NAME } from "./config/index.js";
 import { normalizePhoneVN } from "./utils.js";
 
-const FILE_PATH = "./data/d_100001292170616.csv";
+const FILE_PATH = process.argv[2];
+if (!FILE_PATH) {
+  console.error('❌ missing file path.');
+  process.exit(1);
+}
 
 // ✅ Kiểm tra định dạng tên file
 const baseName = path.basename(FILE_PATH); // → d_100001292170616.csv
