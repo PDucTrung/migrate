@@ -8,7 +8,8 @@
     "import-phone": "node import-phone.js",
     "import-user": "node import-user.js",
     "import-page": "node import-page.js",
-    "import-page-meta": "node import-page-meta.js"
+    "import-page-meta": "node import-page-meta.js",
+    "import-page-config-brandfits": "node import-page-config-brandfits"
   },
   "dependencies": {
     "dotenv": "^16.5.0",
