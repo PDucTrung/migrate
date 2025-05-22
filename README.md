@@ -49,3 +49,8 @@ yarn import-page-meta ./data/page_meta.csv
 yarn import-page-config-brandfits ./data/page_config_brandfits.csv
 
 ```
+
+```bash
+yarn import-comment ./data/comment.csv
+
+```

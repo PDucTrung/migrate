@@ -9,7 +9,8 @@
     "import-user": "node import-user.js",
     "import-page": "node import-page.js",
     "import-page-meta": "node import-page-meta.js",
-    "import-page-config-brandfits": "node import-page-config-brandfits"
+    "import-page-config-brandfits": "node import-page-config-brandfits",
+    "import-comment": "node import-comment"
   },
   "dependencies": {
     "dotenv": "^16.5.0",

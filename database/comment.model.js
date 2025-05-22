@@ -1,14 +1,18 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const commentSchema = new mongoose.Schema(
   {
     // _id: { type: String }, // từ SQL: id
-    id: { type: String }, // từ SQL: id
+    id: { type: String, unique: true }, // từ SQL: id
     postId: { type: String, index: true },
     parentCommentId: { type: String },
     date: { type: Date, index: true },
     content: { type: String },
-    isNoTextContent: { type: Boolean },
+    isNoTextContent: {
+      type: Number,
+      enum: [0, 1, null],
+      default: null,
+    },
     userId: { type: String },
     userName: { type: String },
   },
@@ -18,4 +22,4 @@ const commentSchema = new mongoose.Schema(
   }
 );
 
-export const Comment = mongoose.model('Comment', commentSchema);
+export const Comment = mongoose.model("Comment", commentSchema);
