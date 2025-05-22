@@ -32,6 +32,6 @@ yarn import-phone <file-path>
 yarn import-user <file-path>
 
 ```
-- Ex import user: yarn import-user ./data/d_100001292170616.csv
-- Note: When importing users, the file name must be in the correct format <d_groupId>.csv
+- Ex import user: yarn import-user `./data/d_100001292170616.csv`
+- Note: When importing users, the file name must be in the correct format `d_<groupId>.csv`
 
