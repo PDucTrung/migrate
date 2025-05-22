@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "import-phone": "node import-phone.js",
-    "import-user": "node import-user.js"
+    "import-user": "node import-user.js",
+    "import-page": "node import-page.js"
   },
   "dependencies": {
     "dotenv": "^16.5.0",

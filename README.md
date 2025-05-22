@@ -7,7 +7,7 @@ cd migrate
 yarn install
 ```
 
-- Create csv file csv and paste data
+- Create csv file csv and paste data ex:
 
 ```bash
 touch data/vnphone.csv
@@ -34,4 +34,9 @@ yarn import-user <file-path>
 ```
 - Ex import user: yarn import-user `./data/d_100001292170616.csv`
 - Note: When importing users, the file name must be in the correct format `d_<groupId>.csv`
+
+```bash
+yarn import-user ./data/page.csv
+
+```
 
