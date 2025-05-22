@@ -35,8 +35,8 @@ async function run() {
         userName: row.userName?.toString(),
         isActive,
         status: row.status ? parseInt(row.status) : 1,
-        createdAt: row.createdAt ? new Date(row.createdAt) : undefined,
-        updatedAt: row.updatedAt ? new Date(row.updatedAt) : undefined,
+        createdAt: r.createdAt ? new Date(r.createdAt) : new Date(),
+        updatedAt: r.updatedAt ? new Date(r.updatedAt) : new Date(),
       };
     })
     .filter((r) => r.id); // loại dòng không có id

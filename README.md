@@ -59,3 +59,13 @@ yarn import-comment ./data/comment.csv
 yarn import-comment-meta ./data/comment_meta.csv
 
 ```
+
+```bash
+yarn import-post ./data/post.csv
+
+```
+
+```bash
+yarn import-post-meta ./data/post_menta.csv
+
+```

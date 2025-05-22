@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const postSchema = new mongoose.Schema(
   {
     // _id: { type: String }, // từ SQL: id
-    id: { type: String }, // từ SQL: id
+    id: { type: String, unique: true }, // từ SQL: id
     pageId: { type: String, index: true },
     date: { type: Date, index: true },
     content: { type: String },
