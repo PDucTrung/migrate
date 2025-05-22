@@ -79,3 +79,8 @@ yarn import-post-crawl-daily ./data/post_crawl_daily.csv
 yarn import-posts-id-crawl-daily ./data/posts_id_crawl_daily.csv
 
 ```
+
+```bash
+yarn import-insight ./data/insight_796192283814580.csv
+
+```

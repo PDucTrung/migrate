@@ -15,7 +15,8 @@
     "import-post": "node import-post.js",
     "import-post-meta": "node import-post-meta.js",
     "import-post-crawl-daily": "node import-post-crawl-daily.js",
-    "import-posts-id-crawl-daily": "node import-posts-id-crawl-daily.js"
+    "import-posts-id-crawl-daily": "node import-posts-id-crawl-daily.js",
+    "import-insight": "node import-insight.js"
   },
   "dependencies": {
     "dotenv": "^16.5.0",
