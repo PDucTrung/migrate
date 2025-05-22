@@ -36,7 +36,12 @@ yarn import-user <file-path>
 - Note: When importing users, the file name must be in the correct format `d_<groupId>.csv`
 
 ```bash
-yarn import-user ./data/page.csv
+yarn import-page ./data/page.csv
+
+```
+
+```bash
+yarn import-page-meta ./data/page_meta.csv
 
 ```
 

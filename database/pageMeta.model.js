@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const pageMetaSchema = new mongoose.Schema(
   {
@@ -70,15 +70,19 @@ const pageMetaSchema = new mongoose.Schema(
     bottom10UnbrandedPost: { type: String },
 
     clients: { type: String },
-    isBrand: { type: Boolean },
-    workWithTPG: { type: String },
-    PriceFrom: { type: mongoose.Schema.Types.Decimal128 },
-    PriceTo: { type: mongoose.Schema.Types.Decimal128 },
+    isBrand: { type: Number },
+    workWithTPG: { type: String,  default: null },
+    PriceFrom: { type: Number,  default: null },
+    PriceTo: { type: Number,  default: null },
 
-    isActive: { type: Boolean }
+    isActive: {
+      type: Number,
+      enum: [0, 1, null],
+      default: 1,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 

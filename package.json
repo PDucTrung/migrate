@@ -7,9 +7,11 @@
   "scripts": {
     "import-phone": "node import-phone.js",
     "import-user": "node import-user.js",
-    "import-page": "node import-page.js"
+    "import-page": "node import-page.js",
+    "import-page-meta": "node import-page-meta.js"
   },
   "dependencies": {
+    "csv-parse": "^5.6.0",
     "dotenv": "^16.5.0",
     "iconv-lite": "^0.6.3",
     "mongoose": "^8.15.0",
