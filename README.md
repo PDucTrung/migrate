@@ -1,10 +1,19 @@
 ## Setup Instructions
 
-### 1. Clone the Repository
+### Clone the Repository
 ```bash
 git clone https://github.com/PDucTrung/migrate.git
 cd migrate
 yarn install
+```
+
+- Create csv file csv and paste data
+
+```bash
+touch data/vnphone.csv
+```
+```bash
+touch data/d_<groupid>.csv
 ```
 
 ---
