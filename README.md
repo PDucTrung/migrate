@@ -25,7 +25,7 @@ touch data/d_<groupid>.csv
 yarn import-phone <file-path>
 
 ```
-- Ex import phone: yarn import-phone ./data/vnphone.csv
+- Ex import phone: yarn import-phone `./data/vnphone.csv`
 
 
 ```bash
