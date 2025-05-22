@@ -47,8 +47,8 @@ async function run() {
         userName: r.userName || null,
         // createdAt/updatedAt do mongoose tự generate,
         // nếu muốn dùng timestamp từ CSV, uncomment:
-        // createdAt: r.createdAt ? new Date(r.createdAt) : undefined,
-        // updatedAt: r.updatedAt ? new Date(r.updatedAt) : undefined,
+        createdAt: r.createdAt ? new Date(r.createdAt) : new Date(),
+        updatedAt: r.updatedAt ? new Date(r.updatedAt) : new Date(),
       };
     })
     .filter(doc => doc.id && doc.postId); // tối thiểu cần id + postId
