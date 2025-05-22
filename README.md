@@ -71,6 +71,11 @@ yarn import-post-meta ./data/post_menta.csv
 ```
 
 ```bash
-yarn post-crawl-daily ./data/post_crawl_daily.csv
+yarn import-post-crawl-daily ./data/post_crawl_daily.csv
+
+```
+
+```bash
+yarn import-posts-id-crawl-daily ./data/posts_id_crawl_daily.csv
 
 ```
