@@ -11,7 +11,7 @@ import { normalizePhoneVN } from "./utils.js";
 
 const FILE_PATH = process.argv[2];
 if (!FILE_PATH) {
-  console.error('❌ missing file path.');
+  console.error("❌ missing file path.");
   process.exit(1);
 }
 
@@ -41,6 +41,7 @@ async function importUsers() {
 
   console.log(`📥 Loaded ${rows.length} rows from file ${FILE_PATH}`);
 
+  let index = 0;
   for (const row of rows) {
     const uid = row.Uid?.toString().trim();
     if (!uid) continue;
@@ -93,12 +94,15 @@ async function importUsers() {
         { uid, groupId: GROUP_ID },
         { upsert: true }
       );
+
+      index++;
+      console.log(`✅ Import User ${uid} - ${row.Name} completed (${index})`);
     } catch (err) {
       console.error(`❌ Error on uid ${uid}:`, err.message);
     }
   }
 
-  console.log("✅ Import completed");
+  console.log(`🎉 Import ${rows.length} rows completed.`);
   await mongoose.disconnect();
 }
 

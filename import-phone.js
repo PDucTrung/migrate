@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import xlsx from "xlsx";
-import { MONGO_URI, DB_NAME } from "./config/index.js";
+import { MONGO_URI, DB_NAME, BATCH_SIZE } from "./config/index.js";
 import { Phone } from "./database/vnPhone.model.js";
 import { normalizePhoneVN } from "./utils.js";
 
@@ -27,19 +27,30 @@ async function run() {
     })
     .filter(Boolean);
 
-  try {
-    const result = await Phone.insertMany(validRows, { ordered: false });
-    console.log(`✅ Inserted ${result.length} new records`);
-  } catch (err) {
-    if (err.writeErrors) {
-      const insertedCount = err.result?.result?.nInserted || 0;
+  console.log(`📥 Prepared ${validRows.length} valid rows (${rows.length})`);
+
+  for (let i = 0; i < validRows.length; i += BATCH_SIZE) {
+    const batch = validRows.slice(i, i + BATCH_SIZE);
+    try {
+      const result = await Phone.insertMany(batch, { ordered: false });
       console.log(
-        `⚠️ Some duplicates skipped. Inserted ${insertedCount} records.`
+        `✅ Inserted batch ${i / BATCH_SIZE + 1}: ${result.length} records`
       );
-    } else {
-      console.error("❌ Insert failed:", err);
+    } catch (err) {
+      if (err.writeErrors) {
+        const insertedCount = err.result?.result?.nInserted || 0;
+        console.log(
+          `⚠️ Batch ${
+            i / BATCH_SIZE + 1
+          }: Some duplicates skipped. Inserted ${insertedCount} records.`
+        );
+      } else {
+        console.error(`❌ Error in batch ${i / BATCH_SIZE + 1}:`, err.message);
+      }
     }
   }
+
+  console.log(`🎉 Import ${validRows.length} rows completed.`);
 
   await mongoose.disconnect();
 }

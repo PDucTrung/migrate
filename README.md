@@ -1,9 +1,11 @@
 ## Setup Instructions
 
 ### 1. Clone the Repository
-bash
-git clone <repository_url>
-cd <project_directory>
+```bash
+git clone https://github.com/PDucTrung/migrate.git
+cd migrate
+yarn install
+```
 
 ---
 
@@ -14,13 +16,13 @@ cd <project_directory>
 yarn import-phone <file-path>
 
 ```
+- Ex import phone: yarn import-phone ./data/vnphone.csv
+
 
 ```bash
 yarn import-user <file-path>
 
 ```
-
-- Ex import phone: yarn import-user ./data/vnphone.csv
 - Ex import user: yarn import-user ./data/d_100001292170616.csv
-
+- Note: When importing users, the file name must be in the correct format d_<groupId>.csv
 
