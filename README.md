@@ -69,3 +69,8 @@ yarn import-post ./data/post.csv
 yarn import-post-meta ./data/post_menta.csv
 
 ```
+
+```bash
+yarn post-crawl-daily ./data/post_crawl_daily.csv
+
+```

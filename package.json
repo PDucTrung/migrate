@@ -13,7 +13,8 @@
     "import-comment": "node import-comment.js",
     "import-comment-meta": "node import-comment-meta.js",
     "import-post": "node import-post.js",
-    "import-post-meta": "node import-post-meta.js"
+    "import-post-meta": "node import-post-meta.js",
+    "post-crawl-daily": "node post-crawl-daily.js"
   },
   "dependencies": {
     "dotenv": "^16.5.0",
