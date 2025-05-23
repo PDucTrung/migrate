@@ -18,7 +18,8 @@
     "import-posts-id-crawl-daily": "node import-posts-id-crawl-daily.js",
     "import-insight": "node import-insight.js",
     "import-reaction": "node import-reaction.js",
-    "import-sequelize-meta": "node import-sequelize-meta.js"
+    "import-sequelize-meta": "node import-sequelize-meta.js",
+    "import-tag-config-brand": "node import-tag-config-brand.js"
   },
   "dependencies": {
     "dotenv": "^16.5.0",

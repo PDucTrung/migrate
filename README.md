@@ -94,3 +94,8 @@ yarn import-reaction ./data/reaction.csv
 yarn import-sequelize-meta ./data/sequelize_meta.csv
 
 ```
+
+```bash
+yarn import-tag-config-brand ./data/tag_config_brand.csv
+
+```
