@@ -99,3 +99,13 @@ yarn import-sequelize-meta ./data/sequelize_meta.csv
 yarn import-tag-config-brand ./data/tag_config_brand.csv
 
 ```
+
+```bash
+yarn import-tag-config-category ./data/tag_config_category.csv
+
+```
+
+```bash
+yarn import-tag-config-sentiment ./data/tag_config_sentiment.csv
+
+```

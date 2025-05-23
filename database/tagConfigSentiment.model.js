@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const tagConfigSentimentSchema = new mongoose.Schema(
   {
+    id: { type: String, unique: true }, // từ postId
     brandKeywords: { type: String },
     brandCompetitors: { type: String },
     generalPositive: { type: String },
@@ -18,4 +19,7 @@ const tagConfigSentimentSchema = new mongoose.Schema(
   }
 );
 
-export const TagConfigSentiment = mongoose.model('TagConfigSentiment', tagConfigSentimentSchema);
+export const TagConfigSentiment = mongoose.model(
+  "TagConfigSentiment",
+  tagConfigSentimentSchema
+);
