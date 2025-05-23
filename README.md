@@ -109,3 +109,13 @@ yarn import-tag-config-category ./data/tag_config_category.csv
 yarn import-tag-config-sentiment ./data/tag_config_sentiment.csv
 
 ```
+
+```bash
+yarn import-temp-60-post ./data/temp_60_post.csv
+
+```
+
+```bash
+yarn import-temp-not-60-post ./data/temp_not_60_post.csv
+
+```

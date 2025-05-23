@@ -21,7 +21,9 @@
     "import-sequelize-meta": "node import-sequelize-meta.js",
     "import-tag-config-brand": "node import-tag-config-brand.js",
     "import-tag-config-category": "node import-tag-config-category.js",
-    "import-tag-config-sentiment": "node import-tag-config-sentiment.js"
+    "import-tag-config-sentiment": "node import-tag-config-sentiment.js",
+    "import-temp-60-post": "node import-temp-60-post.js",
+    "import-temp-not-60-post": "node import-temp-not-60-post.js"
   },
   "dependencies": {
     "dotenv": "^16.5.0",
