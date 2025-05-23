@@ -84,7 +84,13 @@ yarn import-posts-id-crawl-daily ./data/posts_id_crawl_daily.csv
 yarn import-insight ./data/insight_796192283814580.csv
 
 ```
+
 ```bash
 yarn import-reaction ./data/reaction.csv
+
+```
+
+```bash
+yarn import-sequelize-meta ./data/sequelize_meta.csv
 
 ```
