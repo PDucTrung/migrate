@@ -55,6 +55,7 @@ async function importUsers() {
     }
 
     const userData = {
+      id: String(row.id),
       uid,
       phone,
       name: row.Name,

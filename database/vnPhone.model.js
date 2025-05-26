@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const phoneSchema = new mongoose.Schema(
   {
+    id: { type: String }, // từ SQL: id
     uid: { type: String, required: true, index: true },
     phone: { type: String, required: true, index: true },
   },

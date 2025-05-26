@@ -29,6 +29,7 @@ async function run() {
   // 4. Map sang docs
   const docs = rows
     .map((r) => ({
+      id: String(r.id),
       commentId: String(r.commentId),
       sentimentAuto: r.sentimentAuto || null,
       sentimentManual: r.sentimentManual || null,

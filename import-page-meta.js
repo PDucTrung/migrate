@@ -55,6 +55,7 @@ async function run() {
       else if (row.isActive === "1") isActive = 1;
 
       return {
+        id: String(row.id),
         pageId: row.pageId,
 
         brand: (row.brand),

@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const commentMetaSchema = new mongoose.Schema(
   {
+    id: { type: String }, // từ SQL: id
     commentId: { type: String, index: true },
     sentimentAuto: { type: String, index: true },
     sentimentManual: { type: String, index: true },

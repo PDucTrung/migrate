@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const postsIdCrawlDailySchema = new mongoose.Schema(
   {
     // _id: { type: String }, // từ postId
-    id: { type: String }, // từ postId
+    postId: { type: String }, // từ postId
     pageId: { type: String },
     createDate: { type: Date },
     content: { type: String },

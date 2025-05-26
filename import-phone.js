@@ -23,7 +23,7 @@ async function run() {
   const validRows = rows
     .map((row) => {
       const phone = normalizePhoneVN(row.phone);
-      return phone ? { uid: row.uid, phone } : null;
+      return phone ? { id: String(row.id), uid: row.uid, phone } : null;
     })
     .filter(Boolean);
 

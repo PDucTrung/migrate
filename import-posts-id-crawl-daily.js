@@ -32,7 +32,7 @@ async function run() {
       // bắt buộc có postId và pageId ít nhất
       if (!r.postId) return null;
       return {
-        id:             String(r.postId).trim(),
+        postId:         String(r.postId).trim(),
         pageId:         String(r.pageId || "").trim() || undefined,
         createDate:     r.createDate ? new Date(r.createDate) : undefined,
         content:        String(r.content || "").trim(),

@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const pageMetaSchema = new mongoose.Schema(
   {
+    id: { type: String }, // từ SQL: id
     pageId: { type: String, unique: true, index: true },
 
     brand: { type: String },
@@ -71,9 +72,9 @@ const pageMetaSchema = new mongoose.Schema(
 
     clients: { type: String },
     isBrand: { type: Number },
-    workWithTPG: { type: String,  default: null },
-    PriceFrom: { type: Number,  default: null },
-    PriceTo: { type: Number,  default: null },
+    workWithTPG: { type: String, default: null },
+    PriceFrom: { type: Number, default: null },
+    PriceTo: { type: Number, default: null },
 
     isActive: {
       type: Number,

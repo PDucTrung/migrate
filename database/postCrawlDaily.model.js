@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const postCrawlDailySchema = new mongoose.Schema(
   {
+    id: { type: String }, // từ SQL: id
     postId: { type: String, required: true },
     crawlDate: { type: Date, required: true },
 
@@ -20,4 +21,7 @@ const postCrawlDailySchema = new mongoose.Schema(
   }
 );
 
-export const PostCrawlDaily = mongoose.model('PostCrawlDaily', postCrawlDailySchema);
+export const PostCrawlDaily = mongoose.model(
+  "PostCrawlDaily",
+  postCrawlDailySchema
+);

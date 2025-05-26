@@ -27,9 +27,15 @@ async function run() {
 
   // Chỉ lấy cột `name`, loại bỏ hàng không có name
   const docs = rows
-    .map(r => r.name && r.name.trim())
-    .filter(name => name)
-    .map(name => ({ name }));
+    .map((r) => {
+      return {
+        id: String(r.id),
+        name: r.name && r.name.trim(),
+        createdAt: r.createdAt ? new Date(r.createdAt) : new Date(),
+        updatedAt: r.updatedAt ? new Date(r.updatedAt) : new Date(),
+      };
+    })
+    .filter((r) => r?.name)
 
   console.log(`📥 Prepared ${docs.length} docs (${rows.length} total rows)`);
 
@@ -37,14 +43,18 @@ async function run() {
   for (let i = 0; i < docs.length; i += BATCH_SIZE) {
     const batch = docs.slice(i, i + BATCH_SIZE);
     try {
-      const res = await PageConfigBrandfit.insertMany(batch, { ordered: false });
-      console.log(`✅ Batch ${i/BATCH_SIZE + 1}: Inserted ${res.length}`);
+      const res = await PageConfigBrandfit.insertMany(batch, {
+        ordered: false,
+      });
+      console.log(`✅ Batch ${i / BATCH_SIZE + 1}: Inserted ${res.length}`);
     } catch (err) {
       if (err.writeErrors) {
         const inserted = err.result?.nInserted || 0;
-        console.warn(`⚠️ Batch ${i/BATCH_SIZE + 1}: Inserted ${inserted}, skipped dupes`);
+        console.warn(
+          `⚠️ Batch ${i / BATCH_SIZE + 1}: Inserted ${inserted}, skipped dupes`
+        );
       } else {
-        console.error(`❌ Batch ${i/BATCH_SIZE + 1} error:`, err.message);
+        console.error(`❌ Batch ${i / BATCH_SIZE + 1} error:`, err.message);
       }
     }
   }
@@ -53,7 +63,7 @@ async function run() {
   await mongoose.disconnect();
 }
 
-run().catch(err => {
+run().catch((err) => {
   console.error(err);
   process.exit(1);
 });

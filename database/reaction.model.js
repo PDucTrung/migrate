@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const reactionSchema = new mongoose.Schema(
   {
+    id: { type: String }, // từ SQL: id
     postId: { type: String, required: true },
     userId: { type: String, required: true },
     userName: { type: String },
@@ -9,11 +10,11 @@ const reactionSchema = new mongoose.Schema(
     reactionValue: { type: Number },
   },
   {
-    timestamps: true // tự động createdAt và updatedAt
+    timestamps: true, // tự động createdAt và updatedAt
   }
 );
 
 // 🔐 Tạo index duy nhất như PRIMARY KEY (postId, userId)
 reactionSchema.index({ postId: 1, userId: 1 }, { unique: true });
 
-export const Reaction = mongoose.model('Reaction', reactionSchema);
+export const Reaction = mongoose.model("Reaction", reactionSchema);
