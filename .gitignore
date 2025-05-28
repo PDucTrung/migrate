@@ -10,8 +10,14 @@
 data/*
 !data/.gitkeep
 
+dumps/*
+!dumps/.gitkeep
+
 # yarn
 yarn.lock
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+export_limited.sh
+export_csv.sh

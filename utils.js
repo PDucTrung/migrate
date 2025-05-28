@@ -36,5 +36,5 @@ export const normalizePhoneVN = (phone) => {
       break;
     }
   }
-  return /^0[3-9][0-9]{8}$/.test(p) ? p : null;
+  return /^0[3-9][0-9]{8}$/.test(p) ? p : p;
 };

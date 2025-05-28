@@ -27,6 +27,17 @@ if (!match) {
 
 const GROUP_ID = match[1];
 
+// Safe parse helpers
+const toSafeInt = (val) => {
+  const num = parseInt(val);
+  return isNaN(num) ? 0 : num;
+};
+
+const toSafeDate = (val) => {
+  const d = new Date(val);
+  return isNaN(d.getTime()) ? null : d;
+};
+
 async function importUsers() {
   await mongoose.connect(MONGO_URI, { dbName: DB_NAME });
   console.log("✅ Connected to MongoDB");
@@ -61,13 +72,13 @@ async function importUsers() {
       name: row.Name,
       sex: row.Sex,
       location: row.Location,
-      friends: parseInt(row.Friends || "0"),
-      follow: parseInt(row.Follow || "0"),
-      birthday: row.Birthday ? new Date(row.Birthday) : null,
+      friends: toSafeInt(row?.Friends),
+      follow: toSafeInt(row?.Follow),
+      birthday: toSafeDate(row?.Birthday),
       relationship: row.Relationship,
       email: row.email,
       note: row.Note,
-      phone2: row.Phone2 ? normalizePhoneVN(row.Phone2) : null,
+      phone2: row?.Phone2 ? normalizePhoneVN(row.Phone2) : undefined,
       fullname: row.Fullname,
       cmnd: row.Cmnd,
       city: row.City,
@@ -76,10 +87,10 @@ async function importUsers() {
       bank: row.Bank,
       income: row.Income,
       house: row.House,
-      children: parseInt(row.Children || "0"),
+      children: toSafeInt(row?.Children),
       title: row.Title,
       company: row.Company,
-      type: parseInt(row.Type || "0"),
+      type: toSafeInt(row?.Type),
       note2: row.Note2,
       note3: row.Note3,
       note4: row.Note4,
