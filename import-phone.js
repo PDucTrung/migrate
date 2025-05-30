@@ -1,9 +1,9 @@
-import fs from 'fs';
-import csv from 'csv-parser';
-import mongoose from 'mongoose';
-import { Phone } from './database/vnPhone.model.js';
-import { normalizePhoneVN } from './utils.js';
-import { MONGO_URI, DB_NAME, BATCH_SIZE } from './config/index.js';
+import fs from "fs";
+import csv from "csv-parser";
+import mongoose from "mongoose";
+import { Phone } from "./database/vnPhone.model.js";
+import { normalizePhoneVN } from "./utils.js";
+import { MONGO_URI, DB_NAME, BATCH_SIZE } from "./config/index.js";
 
 async function run() {
   await mongoose.connect(MONGO_URI, { dbName: DB_NAME });
@@ -18,12 +18,18 @@ async function run() {
   let batch = [];
   let total = 0;
 
-  const stream = fs.createReadStream(FILE_PATH).pipe(csv({ separator: ';' }));
+  const stream = fs.createReadStream(FILE_PATH).pipe(csv({ separator: ";" }));
 
   for await (const row of stream) {
-    const phone = normalizePhoneVN(row.phone);
+    const cleanRow = {};
+    for (const key in row) {
+      const cleanedKey = key.trim().replace(/^\uFEFF/, ""); // xóa BOM
+      cleanRow[cleanedKey] = row[key];
+    }
+
+    const phone = normalizePhoneVN(cleanRow.phone);
     if (phone) {
-      batch.push({ id: String(row.id), uid: row.uid, phone });
+      batch.push({ id: String(cleanRow.id), uid: cleanRow.uid, phone });
     }
 
     if (batch.length >= BATCH_SIZE) {
