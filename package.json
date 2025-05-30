@@ -26,6 +26,7 @@
     "import-temp-not-60-post": "node import-temp-not-60-post.js"
   },
   "dependencies": {
+    "csv-parser": "^3.2.0",
     "dotenv": "^16.5.0",
     "iconv-lite": "^0.6.3",
     "mongoose": "^8.15.0",

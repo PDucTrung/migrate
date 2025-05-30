@@ -21,3 +21,4 @@ yarn-error.log*
 
 export_limited.sh
 export_csv.sh
+export_phone_csv.sh
