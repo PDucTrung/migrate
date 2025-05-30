@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const reactionSchema = new mongoose.Schema(
   {
-    id: { type: String }, // từ SQL: id
+    // id: { type: String }, // từ SQL: id
     postId: { type: String, required: true },
     userId: { type: String, required: true },
     userName: { type: String },
