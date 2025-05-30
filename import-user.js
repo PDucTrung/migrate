@@ -66,7 +66,7 @@ async function importUsers() {
     }
 
     const userData = {
-      id: String(row.id),
+      id: String(row.Id),
       uid,
       phone,
       name: row.Name,

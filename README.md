@@ -66,7 +66,7 @@ yarn import-post ./data/post.csv
 ```
 
 ```bash
-yarn import-post-meta ./data/post_menta.csv
+yarn import-post-meta ./data/post_meta.csv
 
 ```
 
