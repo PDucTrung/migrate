@@ -22,3 +22,6 @@ yarn-error.log*
 export_limited.sh
 export_csv.sh
 export_phone_csv.sh
+
+import.log
+import_list.txt

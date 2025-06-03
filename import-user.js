@@ -52,7 +52,7 @@ async function importUsers() {
   // const rows = xlsx.utils.sheet_to_json(sheet, { defval: "" });
   const streams = fs.createReadStream(FILE_PATH).pipe(csv({ separator: ";" }));
 
-  console.log(`📥 Loaded ${streams.length} rows from file ${FILE_PATH}`);
+  console.log(`📥 Loaded rows from file ${FILE_PATH}`);
 
   let index = 0;
   for await (const stream of streams) {
@@ -122,7 +122,7 @@ async function importUsers() {
     }
   }
 
-  console.log(`🎉 Import ${streams.length} rows completed.`);
+  console.log(`🎉 Import ${index} rows completed.`);
   await mongoose.disconnect();
 }
 
