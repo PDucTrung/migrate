@@ -1,6 +1,7 @@
 import fs from "fs";
 import iconv from "iconv-lite";
 import xlsx from "xlsx";
+import csv from "csv-parser";
 import path from "path";
 import mongoose from "mongoose";
 import { User } from "./database/user.model.js";
@@ -43,17 +44,24 @@ async function importUsers() {
   console.log("✅ Connected to MongoDB");
 
   // Đọc utf8
-  const fileBuffer = fs.readFileSync(FILE_PATH);
-  const fileContent = iconv.decode(fileBuffer, "utf8");
+  // const fileBuffer = fs.readFileSync(FILE_PATH);
+  // const fileContent = iconv.decode(fileBuffer, "utf8");
 
-  const workbook = xlsx.read(fileContent, { type: "string" });
-  const sheet = workbook.Sheets[workbook.SheetNames[0]];
-  const rows = xlsx.utils.sheet_to_json(sheet, { defval: "" });
+  // const workbook = xlsx.read(fileContent, { type: "string" });
+  // const sheet = workbook.Sheets[workbook.SheetNames[0]];
+  // const rows = xlsx.utils.sheet_to_json(sheet, { defval: "" });
+  const streams = fs.createReadStream(FILE_PATH).pipe(csv({ separator: ";" }));
 
-  console.log(`📥 Loaded ${rows.length} rows from file ${FILE_PATH}`);
+  console.log(`📥 Loaded ${streams.length} rows from file ${FILE_PATH}`);
 
   let index = 0;
-  for (const row of rows) {
+  for await (const stream of streams) {
+    const row = {};
+    for (const key in stream) {
+      const cleanedKey = key.trim().replace(/^\uFEFF/, ""); // xóa BOM
+      row[cleanedKey] = stream[key];
+    }
+
     const uid = row.Uid?.toString().trim();
     if (!uid) continue;
 
@@ -114,7 +122,7 @@ async function importUsers() {
     }
   }
 
-  console.log(`🎉 Import ${rows.length} rows completed.`);
+  console.log(`🎉 Import ${streams.length} rows completed.`);
   await mongoose.disconnect();
 }
 
