@@ -12,14 +12,13 @@ while IFS= read -r file || [ -n "$file" ]; do
     
     if [ $? -eq 0 ]; then
       echo "✅ Imported $file, removing from list..."
-      # Xoá dòng chứa file đã import khỏi danh sách
+
       sed -i "/^$file$/d" "$FILE_LIST"
     else
       echo "❌ Failed to import $file, skipping..."
     fi
   else
     echo "⚠️ File $file not found, skipping..."
-    # Cũng có thể xoá nếu không muốn retry sau
     # sed -i "/^$file$/d" "$FILE_LIST"
   fi
 
