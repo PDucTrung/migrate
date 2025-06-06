@@ -8,8 +8,8 @@ const {
 
 const insightSchema = new mongoose.Schema(
   {
-    id: { type: Long, required: true, unique: true }, // tương đương `Id` bigint unsigned, auto-increment bên MySQL
-    uid: { type: Long, required: true, index: true }, // tương đương `Uid` bigint unsigned
+    id: { type: String }, // từ SQL: id
+    uid: { type: String, required: true, index: true },
     group: { type: String }, // tương đương `Group` varchar(255)
     name: { type: String }, // tương đương `Name` text
     type: { type: String, index: true }, // tương đương `Type` varchar(200)
