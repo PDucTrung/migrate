@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import fs from "fs";
 import iconv from "iconv-lite";
-import xlsx from "xlsx";
+import csv from "csv-parser";
 import { MONGO_URI, DB_NAME, BATCH_SIZE } from "./config/index.js";
 import { CommentMeta } from "./database/commentMeta.model.js";
 
@@ -13,69 +13,80 @@ async function run() {
     process.exit(1);
   }
 
-  // 1. Kết nối
+  if (!fs.existsSync(FILE_PATH)) {
+    console.error("❌ File not found:", FILE_PATH);
+    process.exit(1);
+  }
+
   await mongoose.connect(MONGO_URI, { dbName: DB_NAME });
   console.log("✅ Connected to MongoDB");
 
-  // 2. Đọc CSV UTF-8
-  const raw = fs.readFileSync(FILE_PATH);
-  const csv = iconv.decode(raw, "utf8");
+  const stream = fs
+    .createReadStream(FILE_PATH)
+    .pipe(iconv.decodeStream("utf8"))
+    .pipe(csv({ separator: ";", mapHeaders: ({ header }) => header.trim() }));
 
-  // 3. Đọc bằng xlsx với delimiter ;
-  const wb = xlsx.read(csv, { type: "string", FS: ";" });
-  const ws = wb.Sheets[wb.SheetNames[0]];
-  const rows = xlsx.utils.sheet_to_json(ws, { defval: "" });
+  let batch = [];
+  let total = 0;
+  let batchIndex = 0;
 
-  // 4. Map sang docs
-  const docs = rows
-    .map((r) => ({
-      id: String(r.id),
-      commentId: String(r.commentId),
-      sentimentAuto: r.sentimentAuto || null,
-      sentimentManual: r.sentimentManual || null,
-      category: r.category || null,
-      subCategory: r.subCategory || null,
-      brand: r.brand || null,
-      brandKeywords: r.brandKeywords || null,
-      brandCompetitors: r.brandCompetitors || null,
-      generalPositive: r.generalPositive || null,
-      generalNeutral: r.generalNeutral || null,
-      generalNegative: r.generalNegative || null,
-      productType: r.productType || null,
-      productAttributePositive: r.productAttributePositive || null,
-      productAttributeNeutral: r.productAttributeNeutral || null,
-      productAttributeNegative: r.productAttributeNegative || null,
-      specialKeywords: r.specialKeywords || null,
-      syncedDate: r.syncedDate ? new Date(r.syncedDate) : undefined,
-      syncedContent: r.syncedContent || null,
-      createdAt: r.createdAt ? new Date(r.createdAt) : new Date(),
-      updatedAt: r.updatedAt ? new Date(r.updatedAt) : new Date(),
-    }))
-    .filter((doc) => doc.commentId); // tối thiểu phải có commentId
+  for await (const row of stream) {
+    if (!row.commentId) continue;
 
-  console.log(
-    `📥 Prepared ${docs.length} meta-docs (${rows.length} total rows)`
-  );
+    const doc = {
+      id: String(row.id),
+      commentId: String(row.commentId),
+      sentimentAuto: row.sentimentAuto || null,
+      sentimentManual: row.sentimentManual || null,
+      category: row.category || null,
+      subCategory: row.subCategory || null,
+      brand: row.brand || null,
+      brandKeywords: row.brandKeywords || null,
+      brandCompetitors: row.brandCompetitors || null,
+      generalPositive: row.generalPositive || null,
+      generalNeutral: row.generalNeutral || null,
+      generalNegative: row.generalNegative || null,
+      productType: row.productType || null,
+      productAttributePositive: row.productAttributePositive || null,
+      productAttributeNeutral: row.productAttributeNeutral || null,
+      productAttributeNegative: row.productAttributeNegative || null,
+      specialKeywords: row.specialKeywords || null,
+      syncedDate: row.syncedDate ? new Date(row.syncedDate) : undefined,
+      syncedContent: row.syncedContent || null,
+      createdAt: row.createdAt ? new Date(row.createdAt) : new Date(),
+      updatedAt: row.updatedAt ? new Date(row.updatedAt) : new Date(),
+    };
 
-  // 5. Batch insert, skip duplicates
-  for (let i = 0; i < docs.length; i += BATCH_SIZE) {
-    const batch = docs.slice(i, i + BATCH_SIZE);
-    try {
-      const res = await CommentMeta.insertMany(batch, { ordered: false });
-      console.log(`✅ Batch ${i / BATCH_SIZE + 1}: Inserted ${res.length}`);
-    } catch (err) {
-      if (err.writeErrors) {
+    batch.push(doc);
+
+    if (batch.length >= BATCH_SIZE) {
+      batchIndex++;
+      try {
+        const res = await CommentMeta.insertMany(batch, { ordered: false });
+        console.log(`✅ Batch ${batchIndex}: Inserted ${res.length}`);
+      } catch (err) {
         const inserted = err.result?.nInserted || 0;
-        console.warn(
-          `⚠️ Batch ${i / BATCH_SIZE + 1}: Inserted ${inserted}, skipped dupes`
-        );
-      } else {
-        console.error(`❌ Batch ${i / BATCH_SIZE + 1} error:`, err.message);
+        console.warn(`⚠️ Batch ${batchIndex}: Inserted ${inserted}, skipped dupes`);
       }
+      total += batch.length;
+      batch = [];
     }
   }
 
-  console.log(`🎉 Import completed (${docs.length} commentMeta docs).`);
+  // Batch còn lại
+  if (batch.length > 0) {
+    batchIndex++;
+    try {
+      const res = await CommentMeta.insertMany(batch, { ordered: false });
+      console.log(`✅ Batch ${batchIndex}: Inserted ${res.length}`);
+    } catch (err) {
+      const inserted = err.result?.nInserted || 0;
+      console.warn(`⚠️ Batch ${batchIndex}: Inserted ${inserted}, skipped dupes`);
+    }
+    total += batch.length;
+  }
+
+  console.log(`🎉 Import completed (${total} commentMeta docs).`);
   await mongoose.disconnect();
 }
 
