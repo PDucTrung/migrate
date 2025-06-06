@@ -14,3 +14,11 @@ TagConfigCategories.csv,import-tag-config-category
 TagConfigSentiments.csv,import-tag-config-sentiment
 Temp60Posts.csv,import-temp-60-post
 TempNot60Posts.csv,import-temp-not-60-post
+insight_113055811370.csv,import-insight
+insight_123274378015053.csv,import-insight
+insight_676794602720023.csv,import-insight
+insight_796192283814580.csv,import-insight
+insight_1183527068342481.csv,import-insight
+insight_1298967510120245.csv,import-insight
+d_170538939783757.csv,import-user
+d_307755752932085.csv,import-user
