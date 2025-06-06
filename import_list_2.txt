@@ -1,0 +1,16 @@
+CommentMeta.csv,import-comment-meta
+Comments.csv,import-comment
+PageConfigBrandfits.csv,import-page-config-brandfits
+PageMeta.csv,import-page-meta
+Pages.csv,import-page
+postCrawlDaily.csv,import-post-crawl-daily
+PostMeta.csv,mport-post-meta
+Posts.csv,import-post
+postsIdCrawlDaily.csv,import-posts-id-crawl-daily
+Reactions.csv,import-reaction
+SequelizeMeta.csv,import-sequelize-meta
+TagConfigBrands.csv,import-tag-config-brand
+TagConfigCategories.csv,import-tag-config-category
+TagConfigSentiments.csv,import-tag-config-sentiment
+Temp60Posts.csv,import-temp-60-post
+TempNot60Posts.csv,import-temp-not-60-post
